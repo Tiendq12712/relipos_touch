@@ -57,3 +57,65 @@ class RoutePages {
 
 ### Cách call api:
 1. Tạo một file mới trong folder `lib/data/service/` có tên là `example_serive.dart`
+2. Viết các funtion trong abstract class `ExampleService` trong file vừa tạo
+```
+abstract class ExampleService {
+  Future<ExampleResponse> getExample();
+  Future<ExampleResponse> postExample();
+  Future<ExampleResponse> postExample2(RequestBody requestBody);
+}
+Implement ExampleService trong file vừa tạo
+class ExampleServiceImpl implements ExampleService {
+  @override
+  Future<ExampleResponse> getExample() async {
+    final response = await Get.find<ApiService>().makeGet(
+      '/example',
+    );
+    return ExampleResponse.fromJson(response);
+  }
+  
+  @override
+  Future<ExampleResponse> postExample() async {
+    final response = await Get.find<ApiService>().makePost(
+      '/example',
+    );
+    return ExampleResponse.fromJson(response);
+  }
+  
+  @override
+  Future<ExampleResponse> postExample2(RequestBody requestBody) async {
+    final response = await Get.find<ApiService>().makePost(
+      '/example',
+      body: requestBody.toJson(),
+    );
+    return ExampleResponse.fromJson(response);
+  }
+}
+```
+3. Khởi tạo trong binding của màn hình
+```
+class ExampleBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<ExampleController>(() => ExampleController());
+    Get.lazyPut<ExampleService>(() => ExampleService());
+  }
+}
+```
+4. Viết function call api trong controller của màn hình đó
+```
+class ExampleController extends GetxController {
+  final ExampleService _exampleService = Get.find<ExampleService>();
+  
+  final ExampleResponse example;
+  
+  Future<ExampleResponse> getExample() async {
+    try {
+      final response = await _exampleService.getExample();
+      example = response;
+    } catch (e) {
+      showErrorDialog(e);
+    }
+  }
+}
+```
