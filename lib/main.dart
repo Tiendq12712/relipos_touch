@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:relipos_touch/presentation/mainbiding.dart';
+import 'package:relipos_touch/main_binding.dart';
 import 'package:relipos_touch/presentation/routes/route.dart';
 
 void main() {

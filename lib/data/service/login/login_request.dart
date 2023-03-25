@@ -6,7 +6,7 @@ class LoginRequest {
   int? modId;
   Device? device;
 
-  LoginRequest({branchId, culture, userName, password, modId, device});
+  LoginRequest({this.branchId, this.culture, this.userName, this.password, this.modId, this.device});
 
   LoginRequest.fromJson(Map<String, dynamic> json) {
     branchId = json['BranchId'];
@@ -18,7 +18,7 @@ class LoginRequest {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['BranchId'] = branchId;
     data['Culture'] = culture;
     data['UserName'] = userName;
@@ -37,7 +37,7 @@ class Device {
   String? token;
   int? posId;
 
-  Device({deviceId, deviceName, token, posId});
+  Device({this.deviceId, this.deviceName, this.token, this.posId});
 
   Device.fromJson(Map<String, dynamic> json) {
     deviceId = json['DeviceId'];
@@ -47,7 +47,7 @@ class Device {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['DeviceId'] = deviceId;
     data['DeviceName'] = deviceName;
     data['Token'] = token;
