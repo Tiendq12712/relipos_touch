@@ -66,9 +66,12 @@ abstract class ExampleService {
 }
 Implement ExampleService trong file vừa tạo
 class ExampleServiceImpl implements ExampleService {
+
+  final service = Get.find<ServiceProvider>();
+  
   @override
   Future<ExampleResponse> getExample() async {
-    final response = await Get.find<ApiService>().makeGet(
+    final response = await service.makeGet(
       '/example',
     );
     return ExampleResponse.fromJson(response);
@@ -76,7 +79,7 @@ class ExampleServiceImpl implements ExampleService {
   
   @override
   Future<ExampleResponse> postExample() async {
-    final response = await Get.find<ApiService>().makePost(
+    final response = await service.makePost(
       '/example',
     );
     return ExampleResponse.fromJson(response);
@@ -84,7 +87,7 @@ class ExampleServiceImpl implements ExampleService {
   
   @override
   Future<ExampleResponse> postExample2(RequestBody requestBody) async {
-    final response = await Get.find<ApiService>().makePost(
+    final response = await service.makePost(
       '/example',
       body: requestBody.toJson(),
     );
