@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:relipos_touch/consts/app_style.dart';
 import 'package:relipos_touch/presentation/compoments/relipos_input.dart';
 import 'package:relipos_touch/presentation/screen/login/login_controller.dart';
 
@@ -14,7 +15,7 @@ class LoginScreen extends GetWidget<LoginController> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const SafeArea(child: SizedBox(height: 30)),
-          const Text('Tai khoan'),
+          const Text('Tai khoan', style: ReliposTextStyles.small),
           ReLiPostInput(
             controller: controller.usernameController,
           ),
