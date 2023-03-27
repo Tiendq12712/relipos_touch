@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "compounds": [
+        {
+            "name": "Launch D1",
+            "configurations": [
+                "Launch Chrome",
+                "relipos_touch"
+            ],
+        }
+    ],
+    "configurations": [
+        {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "webRoot": "${workspaceFolder}/relipos_touch",
+            "runtimeArgs": [
+                "--disable-web-security",
+                "--user-data-dir=%APPDATA%\\..\\Local\\tempc"
+            ],
+        },
+        {
+            "name": "relipos_touch",
+            "cwd": "relipos_touch",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "chrome"
+        }
+    ]
+}

@@ -10,10 +10,15 @@ class LoginController extends GetxController {
   final loginService = Get.find<LoginService>();
   final usernameController = TextEditingController();
   final passController = TextEditingController();
+  final GlobalKey<FormState> formState = GlobalKey<FormState>();
 
   void onTapGetRoute() => Get.offAllNamed(ReliposRoutes.homeRoutes);
 
   Future<void> login() async {
+    print("${formState.currentState?.validate()}");
+    if (!(formState.currentState?.validate() ?? false)) {
+      return;
+    }
     LoginRequest loginRequest = LoginRequest(
         userName: usernameController.text,
         password: passController.text,
@@ -31,6 +36,7 @@ class LoginController extends GetxController {
       ServiceProvider.token = respone.jwtToken ?? "";
       onTapGetRoute();
     } catch (e) {
+      print(e);
       showErrorDialog(e);
     }
   }

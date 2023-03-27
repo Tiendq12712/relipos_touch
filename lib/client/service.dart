@@ -9,16 +9,17 @@ class ServiceProvider {
   static String token = "";
 
   ServiceProvider() {
-    dio.options.baseUrl = 'http://192.168.5.42:2202';
-    // dio.options.connectTimeout = const Duration(seconds: 10);
+    dio.options.baseUrl = 'http://192.168.1.148:2202';
+    // dio.options.connectTimeout = const Duration(seconds: 100);
     // dio.options.receiveTimeout = const Duration(milliseconds: 8000);
     dio.options.contentType = "application/json";
 
     // Attach some property on header from all requests
-    dio.interceptors.add(QueuedInterceptorsWrapper(onRequest: (options, handler) {
-      options.headers['JwtToken'] = ServiceProvider.token;
-      handler.next(options);
-    }));
+    // dio.interceptors
+    //     .add(QueuedInterceptorsWrapper(onRequest: (options, handler) {
+    //   options.headers['JwtToken'] = ServiceProvider.token;
+    //   handler.next(options);
+    // }));
   }
 
   Future<Response<T>> _request<T>(
@@ -31,8 +32,10 @@ class ServiceProvider {
       options ??= Options();
       final response = await dio.request<T>(
         path,
-        options: options.copyWith(
-            headers: <String, dynamic>{'Authorization': 'JwtToken ${ServiceProvider.token}', ...?options.headers}),
+        options: options.copyWith(headers: <String, dynamic>{
+          'Authorization': 'JwtToken ${ServiceProvider.token}',
+          ...?options.headers
+        }),
         queryParameters: queryParameters,
         data: data,
       );
@@ -82,11 +85,11 @@ class ServiceProvider {
   }
 
   Future<Response<T>> get<T>(
-      String path, {
-        Map<String, dynamic>? queryParameters,
-        dynamic data,
-        Options? options,
-      }) async {
+    String path, {
+    Map<String, dynamic>? queryParameters,
+    dynamic data,
+    Options? options,
+  }) async {
     return _request<T>(
       path,
       queryParameters: queryParameters,
@@ -99,11 +102,11 @@ class ServiceProvider {
   }
 
   Future<Response<T>> put<T>(
-      String path, {
-        Map<String, dynamic>? queryParameters,
-        dynamic data,
-        Options? options,
-      }) async {
+    String path, {
+    Map<String, dynamic>? queryParameters,
+    dynamic data,
+    Options? options,
+  }) async {
     return _request(
       path,
       queryParameters: queryParameters,
@@ -116,11 +119,11 @@ class ServiceProvider {
   }
 
   Future<Response<T>> post<T>(
-      String path, {
-        Map<String, dynamic>? queryParameters,
-        dynamic data,
-        Options? options,
-      }) async {
+    String path, {
+    Map<String, dynamic>? queryParameters,
+    dynamic data,
+    Options? options,
+  }) async {
     return _request(
       path,
       queryParameters: queryParameters,
@@ -133,11 +136,11 @@ class ServiceProvider {
   }
 
   Future<Response<T>> delete<T>(
-      String path, {
-        Map<String, dynamic>? queryParameters,
-        dynamic data,
-        Options? options,
-      }) async {
+    String path, {
+    Map<String, dynamic>? queryParameters,
+    dynamic data,
+    Options? options,
+  }) async {
     return _request(
       path,
       queryParameters: queryParameters,
@@ -150,11 +153,11 @@ class ServiceProvider {
   }
 
   Future<Response<T>> patch<T>(
-      String path, {
-        Map<String, dynamic>? queryParameters,
-        dynamic data,
-        Options? options,
-      }) async {
+    String path, {
+    Map<String, dynamic>? queryParameters,
+    dynamic data,
+    Options? options,
+  }) async {
     return _request(
       path,
       queryParameters: queryParameters,
@@ -173,7 +176,10 @@ class ServiceProvider {
       ProgressCallback? onReceiveProgress}) async {
     try {
       var response = await dio.get(path,
-          queryParameters: query, options: options, cancelToken: cancelToken, onReceiveProgress: onReceiveProgress);
+          queryParameters: query,
+          options: options,
+          cancelToken: cancelToken,
+          onReceiveProgress: onReceiveProgress);
       return response.data;
     } catch (e) {
       if (e is DioError) {
@@ -203,7 +209,8 @@ class ServiceProvider {
       if (response.data != null) {
         if (response.data['Status'] == 1) {
           return response.data;
-        } else if (response.data['Status'] == 2 || response.data['Status'] == 3) {
+        } else if (response.data['Status'] == 2 ||
+            response.data['Status'] == 3) {
           throw HttpErrorException(msg: response.data['Exception_Message']);
         }
         return response.data;

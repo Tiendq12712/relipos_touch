@@ -13,11 +13,12 @@ class LoginServiceImpl extends LoginService {
   @override
   Future<LoginResponse> login(LoginRequest loginRequest) async {
     try {
-      var response = await service.post('/api/LoginView/login', data: loginRequest.toJson());
-      if (response.data == null) {
+      var response = await service.makePost('/api/LoginView/login',
+          data: loginRequest.toJson());
+      if (response == null) {
         throw Exception('Login failed');
       }
-      LoginResponse loginResponse = LoginResponse.fromJson(response.data);
+      LoginResponse loginResponse = LoginResponse.fromJson(response);
       return loginResponse;
     } catch (e) {
       rethrow;
