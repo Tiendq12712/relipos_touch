@@ -16,35 +16,15 @@ class ReliposFontSize {
     double height = context.height;
     switch (fontSize) {
       case FontSize.H1FontSize:
-        return height > 640
-            ? (height >= 1024 ? 40 : 32)
-            : height < 450
-                ? 17
-                : 22;
+        return height * 0.037;
       case FontSize.H2FontSize:
-        return height > 640
-            ? (height >= 1024 ? 34 : 24)
-            : height < 450
-                ? 15
-                : 18;
+        return height * 0.03;
       case FontSize.H3FontSize:
-        return height > 640
-            ? (height >= 1024 ? 28 : 18)
-            : height < 450
-                ? 13
-                : 15;
+        return height * 0.022;
       case FontSize.H4FontSize:
-        return height > 640
-            ? (height >= 1024 ? 24 : 16)
-            : height < 450
-                ? 10
-                : 12;
+        return height * 0.018;
       case FontSize.H5FontSize:
-        return height > 640
-            ? (height >= 1024 ? 20 : 14)
-            : height < 450
-                ? 7
-                : 10;
+        return height * 0.015;
       default:
         return 0.0;
     }

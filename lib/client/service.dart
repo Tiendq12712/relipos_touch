@@ -9,7 +9,7 @@ class ServiceProvider {
   static String token = "";
 
   ServiceProvider() {
-    dio.options.baseUrl = 'http://192.168.1.148:2202';
+    dio.options.baseUrl = 'http://192.168.1.23:2202';
     // dio.options.connectTimeout = const Duration(seconds: 100);
     // dio.options.receiveTimeout = const Duration(milliseconds: 8000);
     dio.options.contentType = "application/json";
@@ -61,12 +61,8 @@ class ServiceProvider {
       return response;
     } on DioError catch (e) {
       debugPrint('API ERROR: $e, DATA: ${e.response?.data}');
-      if ((e.response?.statusCode ?? 0) == 502) {
-        //TODO
-      }
-      if ((e.response?.statusCode ?? 0) == 401) {
-        //TODO
-      }
+      if ((e.response?.statusCode ?? 0) == 502) {}
+      if ((e.response?.statusCode ?? 0) == 401) {}
       rethrow;
     } catch (e) {
       debugPrint(e.toString());

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:relipos_touch/consts/app_style.dart';
 import 'package:relipos_touch/presentation/compoments/relipos_input.dart';
 import 'package:relipos_touch/presentation/screen/login/login_controller.dart';
@@ -22,7 +21,7 @@ class LoginScreen extends GetWidget<LoginController> {
           ),
           SizedBox(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Form(
                 key: controller.formState,
                 child: Column(
@@ -47,14 +46,14 @@ class LoginScreen extends GetWidget<LoginController> {
                             Center(
                               child: Text("Đăng nhập hệ thống",
                                   style: ReliposTextStyles.getTextStyle(
-                                      context, FontSize.H1FontSize,
+                                      context, FontSize.H2FontSize,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold)),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
-                            Text('Tên đăng nhập',
+                            Text('Tài khoản',
                                 style: ReliposTextStyles.getTextStyle(
                                   context,
                                   FontSize.H3FontSize,
@@ -66,7 +65,7 @@ class LoginScreen extends GetWidget<LoginController> {
                                   Validator.userNameNotEmpty(value),
                               controller: controller.usernameController,
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 10),
                             Text('Mật khẩu',
                                 style: ReliposTextStyles.getTextStyle(
                                   context,
@@ -87,6 +86,7 @@ class LoginScreen extends GetWidget<LoginController> {
                                 height: 50,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
+                                    shadowColor: Colors.white.withOpacity(0.5),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
