@@ -22,9 +22,9 @@ class ReliposFontSize {
       case FontSize.H3FontSize:
         return height * 0.022;
       case FontSize.H4FontSize:
-        return height * 0.018;
+        return height * 0.017;
       case FontSize.H5FontSize:
-        return height * 0.015;
+        return height * 0.01;
       default:
         return 0.0;
     }

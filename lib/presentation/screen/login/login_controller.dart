@@ -15,7 +15,7 @@ class LoginController extends GetxController {
   void onTapGetRoute() => Get.offAllNamed(ReliposRoutes.homeRoutes);
 
   Future<void> login() async {
-    print("${formState.currentState?.validate()}");
+    // print("${formState.currentState?.validate()}");
     if (!(formState.currentState?.validate() ?? false)) {
       return;
     }
@@ -36,7 +36,6 @@ class LoginController extends GetxController {
       ServiceProvider.token = respone.jwtToken ?? "";
       onTapGetRoute();
     } catch (e) {
-      print(e);
       showErrorDialog(e);
     }
   }

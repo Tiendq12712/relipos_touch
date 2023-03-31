@@ -37,7 +37,7 @@ class LoginScreen extends GetWidget<LoginController> {
                       Container(
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.6),
+                          color: Colors.black.withOpacity(0.7),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Column(
